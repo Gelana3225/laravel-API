@@ -1,50 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Get all posts
     public function index()
     {
-        return PostResource::collection(Post::all());
+        return response()->json(Post::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Get single post
+    public function show($id)
+    {
+        return response()->json(Post::findOrFail($id));
+    }
+
+    // Store new post
     public function store(Request $request)
     {
-        //
-    }
+        $post = Post::create($request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($post, 201);
     }
 }
