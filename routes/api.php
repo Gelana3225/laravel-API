@@ -34,10 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('posts', PostController::class);
     });
 
-    Route::apiResource('image-generations', ImageGenerationController::class)->only(['index', 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+Route::apiResource('image-generations', ImageGenerationController::class)->only(['index', 'store']);
 
 
 
